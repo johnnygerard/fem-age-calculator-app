@@ -33,6 +33,11 @@
             ],
             "scripts": [],
             "server": "src/main.server.ts",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
             "prerender": true,
             "ssr": {
               "entry": "server.ts"
@@ -92,6 +97,11 @@
             "assets": [
               "src/assets"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
             "styles": [
               "src/styles.scss"
             ],
