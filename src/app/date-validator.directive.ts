@@ -30,13 +30,13 @@ export class DateValidatorDirective implements Validator {
     const currentMonth = today.getMonth();
     const currentDay = today.getDate();
 
-    // Date should not be in the future
+    // Dates must be in the past
     if (year === currentYear && (
-      month > currentMonth || (month === currentMonth && day > currentDay)
+      month > currentMonth || (month === currentMonth && day >= currentDay)
     )) return { future: true };
 
-    // Date should exist
-    // The Date constructor shifts invalid dates (e.g. from Feb 29, 1991 to Mar 1, 1991)
+    // Dates must exist
+    // The Date constructor shifts nonexistent dates (e.g. from Feb 29, 1991 to Mar 1, 1991)
     if (date.getFullYear() !== year
       || date.getMonth() !== month
       || date.getDate() !== day
