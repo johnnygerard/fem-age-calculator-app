@@ -3,9 +3,9 @@ import { AbstractControl, FormGroup, NG_VALIDATORS, ValidationErrors, Validator 
 
 // Controls are initially undefined until parsed
 type NumberInputs = {
-  year?: AbstractControl<number>;
-  month?: AbstractControl<number>;
-  day?: AbstractControl<number>;
+  year?: AbstractControl<number | undefined>;
+  month?: AbstractControl<number | undefined>;
+  day?: AbstractControl<number | undefined>;
 };
 
 @Directive({
@@ -21,14 +21,16 @@ type NumberInputs = {
 })
 export class DateValidatorDirective implements Validator {
   validate(formGroup: FormGroup<NumberInputs>): ValidationErrors | null {
-    const controls = formGroup.controls;
+    const { year: yearInput, month: monthInput, day: dayInput } = formGroup.controls;
 
-    if (!controls.year || !controls.month || !controls.day)
-      return null;
+    if (yearInput?.value === undefined
+      || monthInput?.value === undefined
+      || dayInput?.value === undefined
+    ) return null;
 
-    const year = controls.year.value;
-    const month = controls.month.value - 1; // Convert to zero-based
-    const day = controls.day.value;
+    const year = yearInput.value;
+    const month = monthInput.value - 1; // Convert to zero-based
+    const day = dayInput.value;
     const date = new Date(year, month, day);
 
     const today = new Date;
