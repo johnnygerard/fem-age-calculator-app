@@ -27,7 +27,7 @@ export class DateValidatorDirective implements Validator {
       return null;
 
     const year = controls.year.value;
-    const month = controls.month.value;
+    const month = controls.month.value - 1; // Convert to zero-based
     const day = controls.day.value;
     const date = new Date(year, month, day);
 
