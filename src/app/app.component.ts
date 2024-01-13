@@ -19,9 +19,11 @@ type Age = {
 export class AppComponent {
   readonly EPOCH = 1583; // First full Gregorian year
   readonly DEFAULT_OUTPUT = '- -';
+  // Input values
   year?: number;
   month?: number; // One-based
   day?: number;
+  // Output values
   years?: number;
   months?: number;
   days?: number;
