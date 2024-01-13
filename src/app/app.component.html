@@ -1,12 +1,12 @@
 <form (ngSubmit)="onSubmit()" #form="ngForm" appDateValidator>
   <label>Day
-    <input type="number" required name="day" [(ngModel)]="day" min="1" max="31">
+    <input type="number" name="day" [(ngModel)]="day" required min="1" max="31">
   </label>
   <label>Month
-    <input type="number" required name="month" [(ngModel)]="month" min="1" max="12">
+    <input type="number" name="month" [(ngModel)]="month" required min="1" max="12">
   </label>
   <label>Year
-    <input type="number" required name="year" [(ngModel)]="year" [min]="EPOCH" [max]="currentYear">
+    <input type="number" name="year" [(ngModel)]="year" required [min]="EPOCH" [max]="currentYear">
   </label>
   <p *ngIf="form.errors?.['future']">Must be in the past</p>
   <p *ngIf="form.errors?.['nonexistent']">Must be a valid date</p>
