@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 import { AbstractControl, FormGroup, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
 
-// Controls are initially undefined until parsed
+// Controls are marked optional because they are undefined until parsed
 type NumberInputs = {
   year?: AbstractControl<number | undefined>;
   month?: AbstractControl<number | undefined>;
@@ -19,18 +19,17 @@ type NumberInputs = {
     }
   ]
 })
+// Cross-field validator (year, month and day inputs)
 export class DateValidatorDirective implements Validator {
   validate(formGroup: FormGroup<NumberInputs>): ValidationErrors | null {
     const { year: yearInput, month: monthInput, day: dayInput } = formGroup.controls;
 
-    if (yearInput?.value === undefined
-      || monthInput?.value === undefined
-      || dayInput?.value === undefined
-    ) return null;
+    // Return if inputs are not all defined (not yet parsed) and valid (single-field validation)
+    if (!(yearInput?.valid && monthInput?.valid && dayInput?.valid)) return null;
 
-    const year = yearInput.value;
-    const month = monthInput.value - 1; // Convert to zero-based
-    const day = dayInput.value;
+    const year = yearInput.value as number;
+    const month = (monthInput.value as number) - 1; // Convert to zero-based
+    const day = dayInput.value as number;
     const date = new Date(year, month, day);
 
     const today = new Date;
@@ -39,6 +38,7 @@ export class DateValidatorDirective implements Validator {
     const currentDay = today.getDate();
 
     // Dates must be in the past
+    // Future years are already validated by the max validator
     if (year === currentYear && (
       month > currentMonth || (month === currentMonth && day >= currentDay)
     )) return { future: true };
