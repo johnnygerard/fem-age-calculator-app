@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { DateValidatorDirective } from './date-validator.directive';
 
 type Age = {
@@ -73,5 +73,20 @@ export class AppComponent {
   #getPreviousMonthDays(year: number, month: number): number {
     // Day 0 is shifted to the previous month's last day
     return new Date(year, month, 0).getDate();
+  }
+
+  isSubmissionDisabled(form: NgForm): boolean | null {
+    const controls = form.controls;
+    const year = controls['year'];
+    const month = controls['month'];
+    const day = controls['day'];
+
+    if (!(year && month && day)) return null;
+
+    const allInputsAreTouchedOrDirty = (year.touched || year.dirty)
+      && (month.touched || month.dirty)
+      && (day.touched || day.dirty);
+
+    return form.invalid && (form.submitted || allInputsAreTouchedOrDirty);
   }
 }

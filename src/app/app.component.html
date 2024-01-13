@@ -27,7 +27,7 @@
     <p *ngIf="yearInput.errors?.['max']">Must be in the past</p>
     <p *ngIf="yearInput.errors?.['min']">Must be at least {{ EPOCH }}</p>
   </label>
-  <button>Compute Age</button>
+  <button [disabled]="isSubmissionDisabled(form)">Compute Age</button>
   <label>
     <output>{{ years ?? DEFAULT_OUTPUT }}</output>
     years
