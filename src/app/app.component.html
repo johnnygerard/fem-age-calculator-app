@@ -2,30 +2,30 @@
   <label>Day
     <input type="number" name="day" [(ngModel)]="day" placeholder="dd" required min="1" max="31"
         #dayInput="ngModel">
-    <p *ngIf="dayInput.errors?.['required'] && (dayInput.touched || form.submitted)">
+    <p *ngIf="dayInput.hasError('required') && (dayInput.touched || form.submitted)">
       This field is required
     </p>
-    <p *ngIf="dayInput.errors?.['min'] || dayInput.errors?.['max']">Must be a valid day</p>
+    <p *ngIf="dayInput.hasError('min') || dayInput.hasError('max')">Must be a valid day</p>
     <!-- Cross-field validation -->
-    <p *ngIf="form.errors?.['future']">Must be in the past</p>
-    <p *ngIf="form.errors?.['nonexistent']">Must be a valid date</p>
+    <p *ngIf="form.hasError('future')">Must be in the past</p>
+    <p *ngIf="form.hasError('nonexistent')">Must be a valid date</p>
   </label>
   <label>Month
     <input type="number" name="month" [(ngModel)]="month" placeholder="mm" required min="1" max="12"
         #monthInput="ngModel">
-    <p *ngIf="monthInput.errors?.['required'] && (monthInput.touched || form.submitted)">
+    <p *ngIf="monthInput.hasError('required') && (monthInput.touched || form.submitted)">
       This field is required
     </p>
-    <p *ngIf="monthInput.errors?.['min'] || monthInput.errors?.['max']">Must be a valid month</p>
+    <p *ngIf="monthInput.hasError('min') || monthInput.hasError('max')">Must be a valid month</p>
   </label>
   <label>Year
     <input type="number" name="year" [(ngModel)]="year" placeholder="yyyy" required [min]="EPOCH"
         [max]="currentYear" #yearInput="ngModel">
-    <p *ngIf="yearInput.errors?.['required'] && (yearInput.touched || form.submitted)">
+    <p *ngIf="yearInput.hasError('required') && (yearInput.touched || form.submitted)">
       This field is required
     </p>
-    <p *ngIf="yearInput.errors?.['max']">Must be in the past</p>
-    <p *ngIf="yearInput.errors?.['min']">Must be at least {{ EPOCH }}</p>
+    <p *ngIf="yearInput.hasError('max')">Must be in the past</p>
+    <p *ngIf="yearInput.hasError('min')">Must be at least {{ EPOCH }}</p>
   </label>
   <button [disabled]="isSubmissionDisabled(form)">Compute Age</button>
   <label>
