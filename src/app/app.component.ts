@@ -29,7 +29,9 @@ export class AppComponent {
     return new Date().getFullYear();
   }
 
-  onSubmit(): void {
+  onSubmit(isValid: boolean | null): void {
+    if (!isValid) return;
+
     const age = this.#computeAge(this.year!, this.month! - 1, this.day!);
 
     // Set output
