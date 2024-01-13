@@ -30,14 +30,14 @@
   <button [disabled]="isSubmissionDisabled(form)">Compute Age</button>
   <label>
     <output>{{ years ?? DEFAULT_OUTPUT }}</output>
-    years
+    year{{ years === 1 ? '' : 's' }}
   </label>
   <label>
     <output>{{ months ?? DEFAULT_OUTPUT }}</output>
-    months
+    month{{ months === 1 ? '' : 's' }}
   </label>
   <label>
     <output>{{ days ?? DEFAULT_OUTPUT }}</output>
-    days
+    day{{ days === 1 ? '' : 's' }}
   </label>
 </form>
