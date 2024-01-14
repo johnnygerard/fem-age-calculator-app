@@ -1,13 +1,37 @@
 @use 'index' as *;
 
-.container {
+:host {
+  display: block;
   position: relative;
-  width: 64px;
-  height: 64px;
+}
+
+hr {
+  background-color: $hr-color;
+
+  // Center vertically
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.container {
+  $size: 64px;
+
+  position: relative;
+  width: $size;
+  height: $size;
+
+  // Center horizontally
+  margin: 0 auto;
 
   @include desktop {
-    width: 96px;
-    height: 96px;
+    $size: 96px;
+
+    width: $size;
+    height: $size;
+
+    // Right align
+    margin: 0 0 0 auto;
   }
 
   &:is(:focus-within, :hover) circle {
@@ -31,6 +55,8 @@ circle {
 }
 
 // Circular hit area
-.container, button, svg {
+.container,
+button,
+svg {
   border-radius: 50%;
 }
