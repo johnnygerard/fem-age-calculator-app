@@ -1,0 +1,36 @@
+@use 'index' as *;
+
+.container {
+  position: relative;
+  width: 64px;
+  height: 64px;
+
+  @include desktop {
+    width: 96px;
+    height: 96px;
+  }
+
+  &:is(:focus-within, :hover) circle {
+    fill: $black;
+  }
+}
+
+button {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  &:focus-visible {
+    outline: solid 4px $purple;
+    outline-offset: 1px;
+  }
+}
+
+circle {
+  fill: $purple;
+}
+
+// Circular hit area
+.container, button, svg {
+  border-radius: 50%;
+}

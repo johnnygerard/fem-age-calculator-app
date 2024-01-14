@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { DateValidatorDirective } from './date-validator.directive';
+import { SubmitButtonComponent } from './submit-button/submit-button.component';
 
 type Age = {
   years: number;
@@ -12,7 +13,7 @@ type Age = {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule, DateValidatorDirective],
+  imports: [CommonModule, FormsModule, DateValidatorDirective, SubmitButtonComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
