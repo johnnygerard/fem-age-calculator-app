@@ -3,5 +3,12 @@
 @use 'index' as *;
 
 body {
+  min-height: 100vh;
   background-color: $light-gray;
+  font-family: 'Poppins', sans-serif;
+
+  // Center content
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
