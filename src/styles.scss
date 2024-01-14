@@ -1,3 +1,7 @@
 @use 'reset';
 @use 'fonts';
 @use 'index' as *;
+
+body {
+  background-color: $light-gray;
+}
