@@ -45,8 +45,13 @@ button {
   height: 100%;
 
   &:focus-visible {
-    outline: solid 4px $purple;
-    outline-offset: 1px;
+    outline: solid 2px white;
+    outline-offset: -4px;
+
+    @include desktop {
+      outline-width: 3px;
+      outline-offset: -6px;
+    }
   }
 }
 
