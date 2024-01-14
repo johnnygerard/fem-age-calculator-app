@@ -19,15 +19,15 @@ type Age = {
 })
 export class AppComponent {
   readonly EPOCH = 1583; // First full Gregorian year
-  readonly DEFAULT_OUTPUT = '- -';
   // Input values
   year?: number;
   month?: number; // One-based
   day?: number;
-  // Output values
-  years?: number;
-  months?: number;
-  days?: number;
+  outputs: { unit: string, value?: number }[] = [
+    { unit: 'year' },
+    { unit: 'month' },
+    { unit: 'day' }
+  ];
   get currentYear(): number {
     return new Date().getFullYear();
   }
@@ -38,9 +38,9 @@ export class AppComponent {
     const age = this.#computeAge(this.year!, this.month! - 1, this.day!);
 
     // Set output
-    this.years = age.years;
-    this.months = age.months;
-    this.days = age.days;
+    this.outputs[0].value = age.years;
+    this.outputs[1].value = age.months;
+    this.outputs[2].value = age.days;
   }
 
   #computeAge(year: number, month: number, day: number): Age {

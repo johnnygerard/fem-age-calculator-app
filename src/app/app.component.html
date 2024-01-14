@@ -28,16 +28,11 @@
     <p *ngIf="yearInput.hasError('min')">Must be at least {{ EPOCH }}</p>
   </label>
   <app-submit-button [disabled]="isSubmissionDisabled(form)" />
-  <label>
-    <output>{{ years ?? DEFAULT_OUTPUT }}</output>
-    <span>year{{ years === 1 ? '' : 's' }}</span>
-  </label>
-  <label>
-    <output>{{ months ?? DEFAULT_OUTPUT }}</output>
-    <span>month{{ months === 1 ? '' : 's' }}</span>
-  </label>
-  <label>
-    <output>{{ days ?? DEFAULT_OUTPUT }}</output>
-    <span>day{{ days === 1 ? '' : 's' }}</span>
+  <label class="output" *ngFor="let output of outputs">
+    <output>
+      <span class="no-output" *ngIf="output.value === undefined"></span>
+      <span>{{ output.value }}</span>
+    </output>
+    <span>{{ output.unit + (output.value === 1 ? '' : 's') }}</span>
   </label>
 </form>
