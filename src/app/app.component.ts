@@ -63,6 +63,12 @@ export class AppComponent {
       // Borrow a month
       months--;
       days += this.#getPreviousMonthDays(currentYear, currentMonth);
+
+      if (months < 0) {
+        // Borrow a year
+        years--;
+        months += 12;
+      }
     }
 
     return { years, months, days };
