@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { DateValidatorDirective } from './date-validator.directive';
 import { SubmitButtonComponent } from './submit-button/submit-button.component';
+import { PluralPipe } from './plural.pipe';
 
 type Age = {
   years: number;
@@ -13,7 +14,13 @@ type Age = {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule, DateValidatorDirective, SubmitButtonComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    DateValidatorDirective,
+    SubmitButtonComponent,
+    PluralPipe,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

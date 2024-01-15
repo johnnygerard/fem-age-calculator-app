@@ -32,6 +32,6 @@
       <span class="no-output" *ngIf="output.value === undefined"></span>
       <span>{{ output.value }}</span>
     </output>
-    <span>{{ output.unit + (output.value === 1 ? '' : 's') }}</span>
+    <span>{{ output.unit | plural: output.value }}</span>
   </label>
 </form>
