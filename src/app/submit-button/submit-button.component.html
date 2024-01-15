@@ -1,9 +1,5 @@
-<!-- Keep hr at the top for painting order -->
 <hr>
-<!-- The div container enables a circular hit area for the submit button -->
-<div class="container">
-  <!-- eslint-disable-next-line @angular-eslint/template/elements-content -->
-  <button [disabled]="disabled"></button>
+<button [disabled]="disabled">
   <svg viewBox="0 0 96 96" fill="none">
     <circle cx="50%" cy="50%" r="50%" />
     <g stroke="white" stroke-width="2">
@@ -12,4 +8,4 @@
       <path d="M70 48.0189C62.6667 47.6859 48 51.6158 48 70" />
     </g>
   </svg>
-</div>
+</button>
