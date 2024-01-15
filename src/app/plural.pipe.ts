@@ -5,7 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true
 })
 export class PluralPipe implements PipeTransform {
+  // Plural form expected
   transform(value: string, quantity?: number): string {
-    return value + (quantity === 1 ? '' : 's');
+    return quantity === 1 ? value.slice(0, -1) : value;
   }
 }

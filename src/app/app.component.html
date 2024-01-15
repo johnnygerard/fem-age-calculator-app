@@ -27,11 +27,11 @@
     </label>
   </div>
   <app-submit-button [disabled]="isSubmissionDisabled(form)" />
-  <label class="output" *ngFor="let output of outputs">
+  <label class="output" *ngFor="let unit of units">
     <output>
-      <span class="no-output" *ngIf="output.value === undefined"></span>
-      <span>{{ output.value }}</span>
+      <span class="no-output" *ngIf="output[unit] === undefined"></span>
+      <span>{{ output[unit] }}</span>
     </output>
-    <span>{{ output.unit | plural: output.value }}</span>
+    <span>{{ unit | plural: output[unit] }}</span>
   </label>
 </form>

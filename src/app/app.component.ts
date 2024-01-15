@@ -30,11 +30,8 @@ export class AppComponent {
   year?: number;
   month?: number; // One-based
   day?: number;
-  outputs: { unit: string, value?: number }[] = [
-    { unit: 'year' },
-    { unit: 'month' },
-    { unit: 'day' }
-  ];
+  units = ['years', 'months', 'days'] as const;
+  output: { [key in typeof this.units[number]]?: number } = {};
   get currentYear(): number {
     return new Date().getFullYear();
   }
@@ -42,12 +39,7 @@ export class AppComponent {
   onSubmit(isValid: boolean | null): void {
     if (!isValid) return;
 
-    const age = this.#computeAge(this.year!, this.month! - 1, this.day!);
-
-    // Set output
-    this.outputs[0].value = age.years;
-    this.outputs[1].value = age.months;
-    this.outputs[2].value = age.days;
+    this.output = this.#computeAge(this.year!, this.month! - 1, this.day!);
   }
 
   #computeAge(year: number, month: number, day: number): Age {
