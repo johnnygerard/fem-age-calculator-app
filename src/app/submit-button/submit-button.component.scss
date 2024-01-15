@@ -43,7 +43,7 @@ button {
     fill: $purple;
   }
 
-  &:is(:focus-visible, :hover) circle {
+  &:is(:focus-visible, :hover):not(:disabled) circle {
     fill: $black;
   }
 
@@ -54,6 +54,14 @@ button {
     @include desktop {
       outline-width: 3px;
       outline-offset: -6px;
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+
+    circle {
+      fill: $red;
     }
   }
 }
