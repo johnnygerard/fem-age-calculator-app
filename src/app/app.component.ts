@@ -39,7 +39,8 @@ export class AppComponent {
   onSubmit(isValid: boolean | null): void {
     if (!isValid) return;
 
-    this.output = this.#computeAge(this.year!, this.month! - 1, this.day!);
+    const month = this.month! - 1; // Convert to zero-based
+    this.output = this.#computeAge(this.year!, month, this.day!);
   }
 
   #computeAge(year: number, month: number, day: number): Age {
