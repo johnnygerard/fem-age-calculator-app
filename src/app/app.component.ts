@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { DateValidatorDirective } from './date-validator.directive';
 import { SubmitButtonComponent } from './submit-button/submit-button.component';
 
@@ -91,5 +91,13 @@ export class AppComponent {
       && (day.touched || day.dirty);
 
     return form.invalid && (form.submitted || allInputsAreTouchedOrDirty);
+  }
+
+  isRequiredError(model: NgModel, form: NgForm): boolean {
+    return model.hasError('required') && (model.touched || form.submitted);
+  }
+
+  isRangeError(model: NgModel): boolean {
+    return model.hasError('min') || model.hasError('max');
   }
 }
