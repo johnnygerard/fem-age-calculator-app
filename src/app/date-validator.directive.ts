@@ -2,7 +2,7 @@ import { Directive } from '@angular/core';
 import { AbstractControl, FormGroup, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
 
 // Controls are marked optional because they are undefined until parsed
-type NumberInputs = {
+type DateInputs = {
   year?: AbstractControl<number | undefined>;
   month?: AbstractControl<number | undefined>;
   day?: AbstractControl<number | undefined>;
@@ -21,7 +21,7 @@ type NumberInputs = {
 })
 // Cross-field validator (year, month and day inputs)
 export class DateValidatorDirective implements Validator {
-  validate(formGroup: FormGroup<NumberInputs>): ValidationErrors | null {
+  validate(formGroup: FormGroup<DateInputs>): ValidationErrors | null {
     const { year: yearInput, month: monthInput, day: dayInput } = formGroup.controls;
 
     // Return if inputs are not all defined (not yet parsed) and valid (single-field validation)
