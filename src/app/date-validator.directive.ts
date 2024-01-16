@@ -25,19 +25,22 @@ export class DateValidatorDirective implements Validator {
     const month = (monthInput.value as number) - 1; // Convert to zero-based
     const day = dayInput.value as number;
     const date = new Date(year, month, day);
-    const today = new Date;
 
-    // Dates must be in the past
-    today.setHours(0, 0, 0, 0); // Truncate to midnight
-    if (date >= today) return { future: true };
-
-    // Dates must exist
-    // The Date constructor shifts nonexistent dates (e.g. from Feb 29, 1991 to Mar 1, 1991)
-    if (date.getFullYear() !== year
-      || date.getMonth() !== month
-      || date.getDate() !== day
-    ) return { nonexistent: true };
+    if (isNotInThePast(date, new Date)) return { future: true };
+    if (isNonexistent(date, year, month, day))
+      return { nonexistent: true };
 
     return null;
   }
+}
+
+export const isNotInThePast = (date: Date, today: Date): boolean => {
+  today.setHours(0, 0, 0, 0); // Truncate to midnight
+  return date >= today;
+}
+
+export const isNonexistent = (date: Date, year: number, month: number, day: number): boolean => {
+  return date.getFullYear() !== year
+    || date.getMonth() !== month
+    || date.getDate() !== day;
 }
