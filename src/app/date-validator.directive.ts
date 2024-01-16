@@ -31,17 +31,11 @@ export class DateValidatorDirective implements Validator {
     const month = (monthInput.value as number) - 1; // Convert to zero-based
     const day = dayInput.value as number;
     const date = new Date(year, month, day);
-
     const today = new Date;
-    const currentYear = today.getFullYear();
-    const currentMonth = today.getMonth();
-    const currentDay = today.getDate();
 
     // Dates must be in the past
-    // Future years are already validated by the max validator
-    if (year === currentYear && (
-      month > currentMonth || (month === currentMonth && day >= currentDay)
-    )) return { future: true };
+    today.setHours(0, 0, 0, 0); // Truncate to midnight
+    if (date >= today) return { future: true };
 
     // Dates must exist
     // The Date constructor shifts nonexistent dates (e.g. from Feb 29, 1991 to Mar 1, 1991)
