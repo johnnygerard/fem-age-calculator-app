@@ -26,7 +26,7 @@ export class DateValidatorDirective implements Validator {
     const day = dayInput.value as number;
     const date = new Date(year, month, day);
 
-    if (isNotInThePast(date, new Date)) return { future: true };
+    if (isNotInThePast(date)) return { future: true };
     if (isNonexistent(date, year, month, day))
       return { nonexistent: true };
 
@@ -34,7 +34,9 @@ export class DateValidatorDirective implements Validator {
   }
 }
 
-export const isNotInThePast = (date: Date, today: Date): boolean => {
+export const isNotInThePast = (date: Date): boolean => {
+  const today = new Date;
+
   today.setHours(0, 0, 0, 0); // Truncate to midnight
   return date >= today;
 }
