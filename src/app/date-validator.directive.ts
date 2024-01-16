@@ -1,12 +1,6 @@
 import { Directive } from '@angular/core';
-import { AbstractControl, FormGroup, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
-
-// Controls are marked optional because they are undefined until parsed
-type DateInputs = {
-  year?: AbstractControl<number | undefined>;
-  month?: AbstractControl<number | undefined>;
-  day?: AbstractControl<number | undefined>;
-};
+import { FormGroup, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
+import { DateInputs } from './date-inputs.type';
 
 @Directive({
   selector: '[appDateValidator]',
