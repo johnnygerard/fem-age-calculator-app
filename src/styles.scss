@@ -3,12 +3,16 @@
 @use 'index' as *;
 
 body {
-  min-height: 100vh;
+  padding: 88px 16px;
+  min-width: 375px;
   background-color: $light-gray;
   font-family: 'Poppins', sans-serif;
 
-  // Center content
+  // Center content horizontally
   display: flex;
   justify-content: center;
-  align-items: center;
+
+  @include desktop {
+    padding: 172px 0 108px;
+  }
 }
