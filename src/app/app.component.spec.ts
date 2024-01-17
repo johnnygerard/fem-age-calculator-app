@@ -12,13 +12,14 @@ describe('Age computation', () => {
     const month = startDate.getMonth();
     const day = startDate.getDate();
 
-    it(`should compute the age correctly for ${year}-${month}-${day}`, () => {
+    it(`should compute the age correctly for ${startDate.toDateString()}`, () => {
       const actual = AppComponent.computeAge(year, month, day);
       const expected = computeAge(year, month, day);
 
-      expect(actual.years).toEqual(expected.years);
-      expect(actual.months).toEqual(expected.months);
-      expect(actual.days).toEqual(expected.days);
+      expect(actual).withContext(`
+        Actual: ${JSON.stringify(actual)}
+        Expected: ${JSON.stringify(expected)}
+      `).toEqual(expected);
     });
   }
 });
