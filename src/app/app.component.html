@@ -26,7 +26,7 @@
       <p *ngIf="yearInput.hasError('min')">Must be at least {{ EPOCH }}</p>
     </label>
   </div>
-  <app-submit-button [disabled]="isSubmissionDisabled(form)" />
+  <app-submit-button [disabled]="isSubmissionDisabled(form)" [class.pending]="pending" />
   <label class="output" *ngFor="let unit of units">
     <output>
       <span class="no-output" *ngIf="output[unit] === undefined"></span>

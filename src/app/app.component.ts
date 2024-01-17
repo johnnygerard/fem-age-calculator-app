@@ -38,7 +38,7 @@ export class AppComponent {
   }
 
   onSubmit(isValid: boolean | null): void {
-    if (!isValid) return;
+    if (!isValid || this.pending) return;
 
     this.pending = true;
     const month = this.month! - 1; // Convert to zero-based
@@ -126,8 +126,7 @@ export class AppComponent {
       && (month.touched || month.dirty)
       && (day.touched || day.dirty);
 
-    return form.invalid && (form.submitted || allInputsAreTouchedOrDirty)
-      || this.pending;
+    return form.invalid && (form.submitted || allInputsAreTouchedOrDirty);
   }
 
   isRequiredError(model: NgModel, form: NgForm): boolean {

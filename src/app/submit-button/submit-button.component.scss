@@ -3,6 +3,10 @@
 :host {
   display: block;
   position: relative;
+
+  &.pending button {
+    cursor: wait;
+  }
 }
 
 hr {
