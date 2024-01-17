@@ -5,7 +5,7 @@ import { DateValidatorDirective } from './date-validator.directive';
 import { SubmitButtonComponent } from './submit-button/submit-button.component';
 import { PluralPipe } from './plural.pipe';
 
-type Age = {
+export type Age = {
   years: number;
   months: number;
   days: number;
@@ -42,11 +42,11 @@ export class AppComponent {
 
     this.pending = true;
     const month = this.month! - 1; // Convert to zero-based
-    const age = this.#computeAge(this.year!, month, this.day!);
+    const age = AppComponent.computeAge(this.year!, month, this.day!);
     this.#animate(age);
   }
 
-  #computeAge(year: number, month: number, day: number): Age {
+  static computeAge(year: number, month: number, day: number): Age {
     const today = new Date;
     const currentYear = today.getFullYear();
     const currentMonth = today.getMonth();
@@ -65,7 +65,7 @@ export class AppComponent {
     if (days < 0) {
       // Borrow a month
       months--;
-      days += this.#getPreviousMonthDays(currentYear, currentMonth);
+      days += this.getPreviousMonthDays(currentYear, currentMonth);
 
       if (months < 0) {
         // Borrow a year
@@ -82,7 +82,7 @@ export class AppComponent {
  * @param year Year
  * @returns Total number of days in the previous month
  */
-  #getPreviousMonthDays(year: number, month: number): number {
+  private static getPreviousMonthDays(year: number, month: number): number {
     // Day 0 is shifted to the previous month's last day
     return new Date(year, month, 0).getDate();
   }
