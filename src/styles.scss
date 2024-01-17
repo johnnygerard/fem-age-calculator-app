@@ -13,6 +13,10 @@ body {
   justify-content: center;
 
   @include desktop {
-    padding: 172px 0 108px;
+    padding: 154px 0;
+
+    // Center content vertically
+    align-items: center;
+    min-height: 100vh;
   }
 }
