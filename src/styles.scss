@@ -1,3 +1,22 @@
 @use 'reset';
 @use 'fonts';
 @use 'index' as *;
+
+body {
+  padding: 88px 16px;
+  min-width: 375px;
+  background-color: $light-gray;
+  font-family: 'Poppins', sans-serif;
+
+  // Center content horizontally
+  display: flex;
+  justify-content: center;
+
+  @include desktop {
+    padding: 154px 0;
+
+    // Center content vertically
+    align-items: center;
+    min-height: 100vh;
+  }
+}

@@ -1,0 +1,71 @@
+@use 'index' as *;
+
+:host {
+  display: block;
+  position: relative;
+
+  &.pending button {
+    cursor: wait;
+  }
+}
+
+hr {
+  background-color: $line;
+
+  // Center vertically
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+button {
+  $size: 64px;
+
+  display: block;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+
+  // Paint in front of the hr
+  position: relative;
+  z-index: 1;
+
+  // Center horizontally
+  margin: 0 auto;
+
+  @include desktop {
+    $size: 96px;
+
+    width: $size;
+    height: $size;
+
+    // Right align
+    margin: 0 0 0 auto;
+  }
+
+  & circle {
+    fill: $purple;
+  }
+
+  &:is(:focus-visible, :hover):not(:disabled) circle {
+    fill: $black;
+  }
+
+  &:focus-visible {
+    outline: solid 2px white;
+    outline-offset: -4px;
+
+    @include desktop {
+      outline-width: 3px;
+      outline-offset: -6px;
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+
+    circle {
+      fill: $red;
+    }
+  }
+}

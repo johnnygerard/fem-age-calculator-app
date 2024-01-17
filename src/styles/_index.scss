@@ -1,11 +1,5 @@
 @mixin mobile {
-  @media (max-width: 767px) {
-    @content;
-  }
-}
-
-@mixin tablet {
-  @media (min-width: 768px) and (max-width: 1439px) {
+  @media (max-width: 1439px) {
     @content;
   }
 }
@@ -15,3 +9,10 @@
     @content;
   }
 }
+
+$purple: #854DFF;
+$black: #151515;
+$light-gray: #F0F0F0;
+$line: #DCDCDC;
+$gray: #716F6F;
+$red: #FF5959;

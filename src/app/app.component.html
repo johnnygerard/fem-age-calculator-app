@@ -1,1 +1,37 @@
-<p>Website under development</p>
+<form (ngSubmit)="onSubmit(form.valid)" #form="ngForm" appDateValidator>
+  <div class="inputs" [class.error]="form.hasError('future') || form.hasError('nonexistent')">
+    <label [class.error]="isRequiredError(dayInput, form) || isRangeError(dayInput)">
+      <span class="input-label">Day</span>
+      <input type="number" name="day" [(ngModel)]="day" placeholder="dd" required min="1" max="31"
+          #dayInput="ngModel">
+      <p *ngIf="isRequiredError(dayInput, form)">This field is required</p>
+      <p *ngIf="isRangeError(dayInput)">Must be a valid day</p>
+      <!-- Cross-field validation -->
+      <p *ngIf="form.hasError('future')">Must be in the past</p>
+      <p *ngIf="form.hasError('nonexistent')">Must be a valid date</p>
+    </label>
+    <label [class.error]="isRequiredError(monthInput, form) || isRangeError(monthInput)">
+      <span class="input-label">Month</span>
+      <input type="number" name="month" [(ngModel)]="month" placeholder="mm" required min="1"
+          max="12" #monthInput="ngModel">
+      <p *ngIf="isRequiredError(monthInput, form)">This field is required</p>
+      <p *ngIf="isRangeError(monthInput)">Must be a valid month</p>
+    </label>
+    <label [class.error]="isRequiredError(yearInput, form) || isRangeError(yearInput)">
+      <span class="input-label">Year</span>
+      <input type="number" name="year" [(ngModel)]="year" placeholder="yyyy" required [min]="EPOCH"
+          [max]="currentYear" #yearInput="ngModel">
+      <p *ngIf="isRequiredError(yearInput, form)">This field is required</p>
+      <p *ngIf="yearInput.hasError('max')">Must be in the past</p>
+      <p *ngIf="yearInput.hasError('min')">Must be at least {{ EPOCH }}</p>
+    </label>
+  </div>
+  <app-submit-button [disabled]="isSubmissionDisabled(form)" [class.pending]="pending" />
+  <label class="output" *ngFor="let unit of units">
+    <output>
+      <span class="no-output" *ngIf="output[unit] === undefined"></span>
+      <span>{{ output[unit] }}</span>
+    </output>
+    <span>{{ unit | plural: output[unit] }}</span>
+  </label>
+</form>

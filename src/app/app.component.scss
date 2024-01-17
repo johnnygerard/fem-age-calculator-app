@@ -1,9 +1,151 @@
 @use 'index' as *;
 
 :host {
-  // Center content for manual testing
+  background-color: white;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+
+  width: 343px;
+  padding: 48px 24px;
+  border-radius: 24px 24px 100px;
+  gap: 32px;
+
+  @include desktop {
+    width: 840px;
+    padding: 56px;
+    border-bottom-right-radius: 200px;
+    gap: 0;
+  }
+}
+
+form {
+  width: 100%;
+}
+
+@include mobile {
+  app-submit-button {
+    margin: 32px 0;
+  }
+}
+
+.inputs {
+  display: flex;
+  gap: 16px;
+
+  @include desktop {
+    gap: 32px;
+  }
+
+  >label {
+    display: flex;
+    flex-direction: column;
+    flex: 1; // Distribute space evenly
+
+    @include desktop {
+      flex: initial;
+      width: 160px;
+    }
+  }
+}
+
+.input-label {
+  // Typography
+  color: $gray;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 3px;
+
+  @include desktop {
+    font-size: 14px;
+    letter-spacing: 3.5px;
+  }
+}
+
+input {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid $line;
+  padding: 12px 16px;
+  margin: 4px 0;
+
+  &:is(:focus, :hover) {
+    outline: 1px solid $purple;
+  }
+
+  // Hide number input arrows (Firefox not supported)
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    display: none;
+  }
+
+  // Typography
+  color: $black;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+
+  @include desktop {
+    // Typography
+    font-size: 32px;
+    letter-spacing: 0.32px;
+
+    padding: 12px 24px;
+    margin: 8px 0;
+  }
+}
+
+.output {
+  display: block;
+
+  // Typography
+  color: $black;
+  font-size: 56px;
+  font-style: italic;
+  font-weight: 800;
+  line-height: 110%;
+  letter-spacing: -1.12px;
+
+  @include desktop {
+    // Typography
+    font-size: 104px;
+    letter-spacing: -2.08px;
+  }
+
+  &>span {
+    margin-left: 8px;
+  }
+}
+
+output {
+  color: $purple;
+}
+
+.no-output::before {
+  content: '--';
+
+  @include desktop {
+    content: '- -';
+  }
+}
+
+// Validation errors
+p {
+  color: $red;
+  font-size: 12px;
+  font-style: italic;
+
+  @include desktop {
+    font-size: 14px;
+  }
+}
+
+.error {
+  & .input-label {
+    color: $red;
+  }
+
+  & input {
+    outline: 1px solid $red;
+  }
 }
