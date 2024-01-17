@@ -32,6 +32,7 @@ export class AppComponent {
   day?: number;
   units = ['years', 'months', 'days'] as const;
   output: { [key in typeof this.units[number]]?: number } = {};
+  pending = false;
   get currentYear(): number {
     return new Date().getFullYear();
   }
@@ -39,8 +40,10 @@ export class AppComponent {
   onSubmit(isValid: boolean | null): void {
     if (!isValid) return;
 
+    this.pending = true;
     const month = this.month! - 1; // Convert to zero-based
-    this.output = this.#computeAge(this.year!, month, this.day!);
+    const age = this.#computeAge(this.year!, month, this.day!);
+    this.#animate(age);
   }
 
   #computeAge(year: number, month: number, day: number): Age {
@@ -84,6 +87,33 @@ export class AppComponent {
     return new Date(year, month, 0).getDate();
   }
 
+  #animate(age: Age): void {
+    const { years, months, days } = age;
+    const TOTAL_DURATION = 800;
+    const STEPS = 50;
+    const INTERVAL = TOTAL_DURATION / STEPS;
+    const yearStep = years / STEPS;
+    const monthStep = months / STEPS;
+    const dayStep = days / STEPS;
+    let i = 0;
+
+    const intervalId = setInterval(() => {
+      if (i > STEPS) {
+        clearInterval(intervalId);
+        this.pending = false;
+        return;
+      }
+
+      this.output = {
+        years: Math.round(yearStep * i),
+        months: Math.round(monthStep * i),
+        days: Math.round(dayStep * i),
+      };
+
+      i++;
+    }, INTERVAL);
+  }
+
   isSubmissionDisabled(form: NgForm): boolean | null {
     const controls = form.controls;
     const year = controls['year'];
@@ -96,7 +126,8 @@ export class AppComponent {
       && (month.touched || month.dirty)
       && (day.touched || day.dirty);
 
-    return form.invalid && (form.submitted || allInputsAreTouchedOrDirty);
+    return form.invalid && (form.submitted || allInputsAreTouchedOrDirty)
+      || this.pending;
   }
 
   isRequiredError(model: NgModel, form: NgForm): boolean {
