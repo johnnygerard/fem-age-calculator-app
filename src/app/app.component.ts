@@ -11,6 +11,8 @@ export type Age = {
   days: number;
 };
 
+export const EPOCH = 1583; // First full Gregorian year
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -25,7 +27,7 @@ export type Age = {
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  readonly EPOCH = 1583; // First full Gregorian year
+  readonly EPOCH = EPOCH;
   // Input values
   year?: number;
   month?: number; // One-based

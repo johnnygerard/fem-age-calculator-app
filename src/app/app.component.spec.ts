@@ -1,63 +1,60 @@
-import { Age, AppComponent } from "./app.component";
+import { Age, AppComponent, EPOCH } from "./app.component";
 
 const today = new Date;
 today.setHours(0, 0, 0, 0); // Truncate to midnight
 
 describe('Age computation', () => {
-  for (const startDate = new Date(2024, 0, 10);
-    startDate < today;
-    startDate.setDate(startDate.getDate() + 1)
-  ) {
-    const year = startDate.getFullYear();
-    const month = startDate.getMonth();
-    const day = startDate.getDate();
+  // // This test loop stops on failure but is slower.
+  // for (const birthDate = new Date(1999, 0, 1); // Total running time: 1.639s
+  //   birthDate < today;
+  //   birthDate.setDate(birthDate.getDate() + 1)
+  // ) {
+  //   const birthDateInput = [
+  //     birthDate.getFullYear(),
+  //     birthDate.getMonth(),
+  //     birthDate.getDate()
+  //   ] as const;
 
-    it(`should compute the age correctly for ${startDate.toDateString()}`, () => {
-      const actual = AppComponent.computeAge(year, month, day);
-      const expected = computeAge(year, month, day);
+  //   it(`should compute the age correctly for ${birthDate.toDateString()}`, () => {
+  //     const age = AppComponent.computeAge(...birthDateInput);
 
-      expect(actual).withContext(`
-        Actual: ${JSON.stringify(actual)}
-        Expected: ${JSON.stringify(expected)}
-      `).toEqual(expected);
-    });
-  }
+  //     expect(validateAge(age, ...birthDateInput)).toBeTrue();
+  //   });
+  // }
+
+  // This test does not stop on failure but runs faster.
+  it('should compute the age correctly', () => {
+    for (const birthDate = new Date(EPOCH, 0, 1); // Total running time: 0.449s
+      birthDate < today;
+      birthDate.setDate(birthDate.getDate() + 1)
+    ) {
+      const birthDateInput = [
+        birthDate.getFullYear(),
+        birthDate.getMonth(),
+        birthDate.getDate()
+      ] as const;
+
+      const age = AppComponent.computeAge(...birthDateInput);
+
+      expect(isAgeValid(age, ...birthDateInput)).toBeTrue();
+    }
+  });
 });
 
-const computeAge = (year: number, month: number, day: number): Age => {
-  const date = new Date(year, month, day);
+const isAgeValid = (
+  age: Age,
+  birthYear: number,
+  birthMonth: number,
+  birthDay: number
+): boolean => {
+  let year = birthYear + age.years;
+  let month = birthMonth + age.months;
+  const day = birthDay + age.days;
 
-  let months = getMonthCount(date);
-  const years = Math.floor(months / 12);
-  months %= 12;
-  const days = getDayCount(date);
-
-  return { years, months, days };
-}
-
-const getMonthCount = (date: Date): number => {
-  let count = 0;
-
-  while (date < today) {
-    date.setMonth(date.getMonth() + 1);
-    count++;
+  if (month > 11) {
+    year += 1;
+    month -= 12;
   }
 
-  if (date > today) {
-    date.setMonth(date.getMonth() - 1);
-    count--;
-  }
-
-  return count;
-}
-
-const getDayCount = (date: Date): number => {
-  let count = 0;
-
-  while (date < today) {
-    date.setDate(date.getDate() + 1);
-    count++;
-  }
-
-  return count;
-}
+  return today.valueOf() === new Date(year, month, day).valueOf();
+};
