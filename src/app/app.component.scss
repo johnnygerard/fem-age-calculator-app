@@ -72,11 +72,14 @@ input {
     outline: 1px solid $purple;
   }
 
-  // Hide number input arrows (Firefox not supported)
+  // Hide number input arrows
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     display: none;
   }
+
+  // Hide number input arrows on Firefox
+  appearance: textfield;
 
   // Typography
   color: $black;
