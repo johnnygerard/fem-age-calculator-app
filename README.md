@@ -1,7 +1,7 @@
 # Frontend Mentor | Age calculator app
 This is my solution to the [Age calculator app challenge](https://www.frontendmentor.io/challenges/age-calculator-app-dF9DFFpj-Q) from [Frontend Mentor](https://www.frontendmentor.io/).
 
-[![project status](https://img.shields.io/badge/status-solution%20published-success?style=for-the-badge)](https://fem-age-calculator-app-jgerard.vercel.app)
+[![project status](https://img.shields.io/badge/status-solution%20published-success?style=for-the-badge)](https://www.frontendmentor.io/solutions/age-calculator-app-jjFpKJl2oA)
 
 ## Tech Stack
 - Angular 17
@@ -25,7 +25,7 @@ This is my solution to the [Age calculator app challenge](https://www.frontendme
 
 ## Links
 - [Website](https://fem-age-calculator-app-jgerard.vercel.app) hosted with [Vercel](https://vercel.com/)
- <!-- - [Solution]() -->
+- [Solution](https://www.frontendmentor.io/solutions/age-calculator-app-jjFpKJl2oA)
 
 ## Screenshots
 ### Mobile
